@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Main Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div class="dashboard">
+     
+    <!-- Sidebar placeholder -->
+    <div id="sidebar-container"></div>
+
+    <main id="contentArea">
+      <h1>THE ACE WORLD</h1>
+    </main>
+  </div>
+
+  <script>
+
+       // Load sidebar from external file
+       fetch('Sidebar.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('sidebar-container').innerHTML = html;
+      });
+
+  function loadPage(page) {
+  fetch(page)
+    .then((res) => res.text())
+    .then((html) => {
+      const contentArea = document.getElementById("contentArea");
+      contentArea.innerHTML = html;
+
+      // Execute any scripts in the loaded HTML
+      const scripts = contentArea.querySelectorAll("script");
+      scripts.forEach((script) => {
+        const newScript = document.createElement("script");
+        newScript.textContent = script.textContent;
+        document.body.appendChild(newScript);
+        document.body.removeChild(newScript); // Clean up after execution
+      });
+
+      // Manually call displaySavedImages if loading button.html
+      if (page === "button.html") {
+        displaySavedImages();
+      }
+
+      // Manually call displaysavedPoemLink if loading Me.html
+      if(page === "Me.html") {
+        dispaysavedPoemLink();
+      }
+    });
+}
+  </script>
+</body>
+</html>

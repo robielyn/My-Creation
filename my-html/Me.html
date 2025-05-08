@@ -1,0 +1,68 @@
+<div>
+  <!-- Modal Form -->
+  <div class="modal active" id="poemModal"> <!-- Keep the modal active -->
+    <h2>Choose Your Poem</h2>
+    <input type="url" id="poemLinkInput" placeholder="Enter or paste a link to your poem" />
+    <div class="modal-buttons">
+      <button id="savePoemLink">Save Link</button>
+      <button id="deletePoemLink">Delete Link</button>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal" id="confirmationModal">
+    <button id="goToCreationPage">Go to Saved Links</button>
+  </div>
+</div>
+
+<script>
+  const poemModal = document.getElementById("poemModal");
+  const poemLinkInput = document.getElementById("poemLinkInput");
+  const savePoemLinkButton = document.getElementById("savePoemLink");
+  const deletePoemLinkButton = document.getElementById("deletePoemLink");
+
+  const confirmationModal = document.getElementById("confirmationModal");
+  const confirmationMessage = document.getElementById("confirmationMessage");
+  const goToCreationPageButton = document.getElementById("goToCreationPage");
+
+// Save Poem Link
+savePoemLinkButton.addEventListener("click", () => {
+  const savedPoemLinks = JSON.parse(localStorage.getItem("savedPoemLinks")) || [];
+  if (poemLinkInput.value) {
+    savedPoemLinks.push({ url: poemLinkInput.value, name: poemLinkInput.value }); // Save as an object with URL and name
+    localStorage.setItem("savedPoemLinks", JSON.stringify(savedPoemLinks)); // Save the updated array to localStorage
+    poemLinkInput.value = ""; // Clear the input field
+
+    // Show alert instead of confirmation modal
+    alert("Poem link saved successfully!");
+  } else {
+    alert("No link entered to save.");
+  }
+});
+
+// Delete Poem Link
+deletePoemLinkButton.addEventListener("click", () => {
+  const savedPoemLinks = JSON.parse(localStorage.getItem("savedPoemLinks")) || [];
+  const linkToDelete = poemLinkInput.value; // Get the URL from the input field
+
+  if (linkToDelete) {
+    const updatedPoemLinks = savedPoemLinks.filter((link) => link.url !== linkToDelete); // Remove the selected link
+    localStorage.setItem("savedPoemLinks", JSON.stringify(updatedPoemLinks)); // Save the updated array to localStorage
+    poemLinkInput.value = ""; // Clear the input field
+
+    // Show alert instead of confirmation modal
+    alert("Poem link deleted successfully!");
+  } else {
+    alert("Please enter a valid link to delete.");
+  }
+});
+
+// Redirect to Creation Page
+goToCreationPageButton.addEventListener("click", () => {
+  window.location.href = "Creation.html"; // Redirect to Creation.html
+});
+</script>
+
+<head>
+  <link rel="stylesheet" href="me.css" />
+</head>

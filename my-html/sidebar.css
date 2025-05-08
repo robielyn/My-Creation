@@ -1,0 +1,66 @@
+/* Ensure full height of the screen */
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  /* Dashboard flex container */
+  .dashboard {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+  }
+  
+/* Sidebar Container */
+.sidebar {
+    width: 250px;
+    height: 100%; /* Ensure it fits the full height of the screen */
+    background-color: rgba(0, 0, 0, 0.0);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 1px solid rgb(19, 19, 18);
+    color: #fff;
+    box-sizing: border-box;
+    overflow-y: auto; /* Add scroll if content exceeds height */
+}
+  /* Sidebar Title */
+  .sidebar h2 {
+    color: #fff;
+    margin: 0 0 20px;
+    font-size: 24px;
+  }
+  
+/* Sidebar Buttons */
+.sidebar button {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #0a0a0a;
+    padding: 10px;
+    margin-bottom: 30px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 5px;
+   
+}
+  /* Button Hover Effect */
+  .sidebar button:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  
+  /* Responsive Sidebar for small screens */
+  @media (max-width: 768px) {
+    .dashboard {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      height: auto;
+      padding: 10px;
+    }
+  }
+  

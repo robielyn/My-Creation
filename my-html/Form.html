@@ -1,0 +1,88 @@
+<div>
+  <!-- Removed the overlay -->
+  <div class="modal active" id="imageModal"> <!-- Keep the modal active -->
+    <h2>Select an Image</h2>
+    <input type="file" id="imageInput" accept="image/*" />
+    
+    <img id="imagePreview" alt="Preview" style="max-width: 50%; height: auto; margin-top: 10px;" />
+
+    <div class="modal-buttons">
+      <button id="saveImage">Save Image</button>
+      <button id="deleteImage">Delete Image</button>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal" id="confirmationModal">
+    <h2 id="confirmationMessage"></h2>
+    <button id="okButton">OK</button>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById("imageModal");
+  const imageInput = document.getElementById("imageInput");
+  const imagePreview = document.getElementById("imagePreview");
+  const saveImageButton = document.getElementById("saveImage");
+  const deleteImageButton = document.getElementById("deleteImage");
+
+  const confirmationModal = document.getElementById("confirmationModal");
+  const confirmationMessage = document.getElementById("confirmationMessage");
+  const okButton = document.getElementById("okButton");
+
+  // Handle image selection
+  imageInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagePreview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Save image
+  saveImageButton.addEventListener("click", () => {
+    const savedImages = JSON.parse(localStorage.getItem("savedImages")) || [];
+    if (imagePreview.src) {
+      savedImages.push(imagePreview.src); // Add the new image to the array
+      localStorage.setItem("savedImages", JSON.stringify(savedImages)); // Save the updated array to localStorage
+      modal.classList.remove("active");
+
+      // Show confirmation modal
+      confirmationMessage.textContent = "Image saved!";
+      confirmationModal.classList.add("active");
+
+    alert("Your image is successfully!");
+    } else {
+      alert("No image selected to save.");
+    }
+  });
+    
+  
+
+  // Delete image
+  deleteImageButton.addEventListener("click", () => {
+    const savedImages = JSON.parse(localStorage.getItem("savedImages")) || [];
+    const updatedImages = savedImages.filter((image) => image !== imagePreview.src); // Remove the current image
+    localStorage.setItem("savedImages", JSON.stringify(updatedImages)); // Save the updated array to localStorage
+    imagePreview.src = ""; // Clear the preview
+
+    modal.classList.remove("active");
+
+    // Show confirmation modal
+    confirmationMessage.textContent = "Image deleted!";
+    confirmationModal.classList.add("active");
+  });
+
+  // Redirect to button.html when OK is clicked
+  okButton.addEventListener("click", () => {
+    confirmationModal.classList.remove("active");
+    window.location.href = "button.html"; // Redirect to button.html
+  });
+</script>
+
+<head>
+  <link rel="stylesheet" href="form.css" />
+</head>

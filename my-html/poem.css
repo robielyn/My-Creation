@@ -1,0 +1,59 @@
+body {
+    font-family: "Georgia", serif;
+    background-image: url('./Images/parchment.jpg'); /* Old parchment texture background */
+    background-image: url('./Images/background.png');
+    background-size: 600px auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #4a3a2a; /* Dark brown color for text */
+    overflow: hidden;
+}
+
+h1 {
+    color: #3c2f2f; /* Darker brown for headings */
+    margin-bottom: 30px;
+    font-size: 2.1em;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+p {
+    line-height: 1.8;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.signature {
+    font-style: italic;
+    margin-top: 32px;
+    color: #666;
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Add a container class for better content organization */
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 90%;
+    margin: 20px auto;
+} 

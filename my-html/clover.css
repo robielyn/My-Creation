@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url('./Images/blue.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    /* Flexbox for centering content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+h1 {
+
+    font-style: italic;
+    font-size: 60px ;
+    font-family: 'Georgia', serif;
+    text-align: center;
+}
+
+h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    margin: 0 0 20px 0; /* Removes top margin and adds spacing below */
+    color: aliceblue;
+}
+
+p {
+    max-width: 800px;
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: aliceblue;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0.5rem 1rem;
+    padding: 1rem;
+    line-height: 1.5;
+   
+}

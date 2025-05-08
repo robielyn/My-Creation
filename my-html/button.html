@@ -1,0 +1,140 @@
+<h1>WELCOME TO MY KINGDOM</h1>
+<button onclick="window.location.href='Dashboard.html'">Explore</button>
+
+<script>
+  const contentArea = document.getElementById("contentArea");
+  
+  function displaySavedImages() {
+    contentArea.innerHTML = ""; // Clear content area before appending new content
+  
+    const savedImages = JSON.parse(localStorage.getItem("savedImages")) || [];
+    const savedComments = JSON.parse(localStorage.getItem("savedComments")) || {};
+    const imageContainer = document.createElement("div");
+    imageContainer.className = "image-container";
+  
+    if (savedImages.length > 0) {
+      savedImages.forEach((imageSrc, index) => {
+        const card = document.createElement("div");
+        card.className = "image-card";
+  
+        const cardInner = document.createElement("div");
+        cardInner.className = "image-card-inner";
+  
+        const cardFront = document.createElement("div");
+        cardFront.className = "image-card-front";
+        const img = document.createElement("img");
+        img.src = imageSrc;
+        img.alt = "Saved Image";
+        img.style.width = "12rem";
+        img.style.height = "15rem";
+        cardFront.appendChild(img);
+  
+        const cardBack = document.createElement("div");
+        cardBack.className = "image-card-back";
+  
+        // Delete Button
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.className = "delete-btn";
+        deleteButton.onclick = () => {
+          const updatedImages = savedImages.filter((_, i) => i !== index);
+          delete savedComments[imageSrc];
+          localStorage.setItem("savedImages", JSON.stringify(updatedImages));
+          localStorage.setItem("savedComments", JSON.stringify(savedComments));
+          displaySavedImages();
+        };
+        cardBack.appendChild(deleteButton);
+  
+        // Comment Button
+        const commentButton = document.createElement("button");
+        commentButton.textContent = "Comment";
+        commentButton.className = "comment-btn";
+        commentButton.onclick = () => {
+          const comment = prompt("Enter your comment:");
+          if (comment) {
+            if (!savedComments[imageSrc]) {
+              savedComments[imageSrc] = [];
+            }
+            savedComments[imageSrc].push(comment);
+            localStorage.setItem("savedComments", JSON.stringify(savedComments));
+            displaySavedImages();
+          }
+        };
+        cardBack.appendChild(commentButton);
+  
+        cardInner.appendChild(cardFront);
+        cardInner.appendChild(cardBack);
+        card.appendChild(cardInner);
+  
+        // ✅ INSERTED FLEX-WRAPPED COMMENT + IMAGE CONTAINER HERE
+        const imageAndCommentsContainer = document.createElement("div");
+        imageAndCommentsContainer.style.display = "flex";
+        imageAndCommentsContainer.style.alignItems = "flex-start";
+        imageAndCommentsContainer.style.gap = "10px";
+        imageAndCommentsContainer.style.marginBottom = "1rem";
+  
+        // Add the image card to the container
+        imageAndCommentsContainer.appendChild(card);
+  
+        // Comments beside the image
+        const commentsSection = document.createElement("div");
+        commentsSection.className = "comments-section";
+        commentsSection.style.display = "flex";
+        commentsSection.style.flexDirection = "column";
+        commentsSection.style.justifyContent = "flex-start";
+        commentsSection.style.marginLeft = "10px";
+  
+        if (savedComments[imageSrc]) {
+          savedComments[imageSrc].forEach((comment) => {
+            const commentElement = document.createElement("p");
+            commentElement.textContent = comment;
+            commentElement.style.margin = "5px 0";
+            commentsSection.appendChild(commentElement);
+          });
+        }
+  
+        imageAndCommentsContainer.appendChild(commentsSection);
+  
+        // Append combined container to main image container
+        imageContainer.appendChild(imageAndCommentsContainer);
+      });
+    } else {
+      imageContainer.textContent = "No images saved.";
+    }
+  
+    contentArea.appendChild(imageContainer);
+  }
+  
+  // Function to save an image and show a modal
+  function saveImageAndRedirect(imageSrc) {
+    const savedImages = JSON.parse(localStorage.getItem("savedImages")) || [];
+    savedImages.push(imageSrc);
+    localStorage.setItem("savedImages", JSON.stringify(savedImages));
+  
+    const modal = document.createElement("div");
+    modal.className = "modal";
+    modal.style.position = "fixed";
+    modal.style.top = "50%";
+    modal.style.left = "50%";
+    modal.style.transform = "translate(-50%, -50%)";
+    modal.style.padding = "20px";
+    modal.style.backgroundColor = "#fff";
+    modal.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+    modal.style.zIndex = "1000";
+    modal.innerHTML = `
+      <p>Image saved successfully!</p>
+      <button id="okButton">OK</button>
+    `;
+  
+    document.body.appendChild(modal);
+  
+    document.getElementById("okButton").addEventListener("click", () => {
+      document.body.removeChild(modal);
+      window.location.href = "Dashboard.html";
+    });
+  }
+  </script>
+  
+<head>
+  <link rel="stylesheet" href="button.css">
+</head>

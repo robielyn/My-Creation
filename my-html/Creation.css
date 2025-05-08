@@ -1,0 +1,87 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0; /* Remove default margin */
+  padding: 0;
+  background-color: #141414;
+  height: 100vh; /* Set the height to exactly match the viewport height */
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: space-between; /* Distribute space between elements */
+}
+
+/* Header */
+h1 {
+  color: #0f0f0f;
+  text-align: center;
+  margin: 10px 0; /* Reduce margin for better fit */
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-color:black ;
+  margin: 0 auto; /* Center the table horizontally */
+  background-color: transparent;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 1; /* Allow the table to grow and fill available space */
+  overflow-y: auto; /* Add scrolling if the table content overflows */
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #111111;
+}
+
+button {
+  margin: 5px; /* Add gap between buttons */
+}
+
+th {
+text-align: center;
+  border-color: #0f0f0f;
+  color: rgb(14, 13, 13);
+}
+
+tr:nth-child(even) {
+  border-color: black;
+  background-color: transparent;
+}
+
+tr:hover {
+  background-color: transparent;
+}
+
+/* Button Styles */
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Rename Button */
+button:nth-child(1) {
+  background-color: #080808; /* Yellow for rename */
+  color:rgb(243, 243, 243);
+}
+
+/* Footer (Optional) */
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #e03a07;
+  color: rgb(240, 240, 240);
+  font-size: 14px;
+}

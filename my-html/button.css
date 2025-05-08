@@ -1,0 +1,70 @@
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('https://i.pinimg.com/736x/ad/8a/07/ad8a07651892ee67933d7c70ca7a0f05.jpg');
+  background-size: cover;
+  background-position: center; /* Ensure the background is centered */
+  margin: 0;
+  height: 100vh; /* Make the body take the full height of the viewport */
+  display: flex; /* Use flexbox for centering */
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  text-align: center; /* Center text inside the container */
+}
+
+h1 {
+  background-image: url(./Images/then.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-clip: text; /* Standard property for compatibility */
+  -webkit-background-clip: text; /* Clip the background to the text */
+  -webkit-text-fill-color: transparent; /* Make the text itself transparent */
+  font-weight: 900;
+  letter-spacing: 4px;
+  font-size: 100px;
+  text-shadow: none; /* Remove text shadow for a cleaner effect */
+  margin-bottom: 20px; /* Add space below the text */
+}
+button {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: transparent; /* Make the background transparent */
+  color: rgb(32, 31, 31); /* Set the text color to white */
+  border: 2px solid rgb(24, 23, 23); /* Add a 2px stroke (border) */
+  border-radius: 8px; /* Keep the rounded corners */
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly visible background on hover */
+  color: rgb(10, 10, 10); /* Ensure text remains white */
+  border-color: rgb(14, 13, 13); /* Keep the border color consistent */
+}
+  /* Modal styling */
+  .modal {
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .modal h2 {
+    color: #4b0082;
+    margin-bottom: 10px;
+  }
+
+  .modal p {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  .modal button {
+    background-color: #20c997;
+  }
+
+  .modal button:hover {
+    background-color: #17a589;
+  }
+ 
+
+  
