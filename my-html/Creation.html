@@ -21,45 +21,52 @@
 <script>
   const savedLinksList = document.getElementById("savedLinksList");
   const backButton = document.getElementById("backButton");
+function displaySavedLinks() {
+  const savedPoemLinks = JSON.parse(localStorage.getItem("savedPoemLinks")) || [];
+  savedLinksList.innerHTML = ""; // Clear the table body
 
-  // Function to display saved links in a table
-  function displaySavedLinks() {
-    const savedPoemLinks = JSON.parse(localStorage.getItem("savedPoemLinks")) || [];
-    savedLinksList.innerHTML = ""; // Clear the table body
+  savedPoemLinks.forEach((link, index) => {
+    const row = document.createElement("tr");
 
-    savedPoemLinks.forEach((link, index) => {
-      const row = document.createElement("tr");
+    // Link column
+    const linkCell = document.createElement("td");
+    const linkElement = document.createElement("a");
 
-      // Link column
-      const linkCell = document.createElement("td");
-      const linkElement = document.createElement("a");
-      linkElement.href = link.url || link; // Handle both object and string formats
-      linkElement.textContent = link.name || link.url || link; // Display name if renamed, otherwise URL
-      linkElement.target = "_blank"; // Open link in a new tab
-      linkCell.appendChild(linkElement);
-      row.appendChild(linkCell);
+    // Ensure the link is in the correct format
+    if (typeof link === "string") {
+      linkElement.href = link; // If it's a string, use it as the URL
+      linkElement.textContent = link; // Display the URL as the text
+    } else if (typeof link === "object" && link.url) {
+      linkElement.href = link.url; // Use the URL property
+      linkElement.textContent = link.name || link.url; // Display the name or URL
+    } else {
+      linkElement.textContent = "Invalid link"; // Handle unexpected formats
+    }
 
-      // Actions column
-      const actionsCell = document.createElement("td");
+    linkElement.target = "_blank"; // Open link in a new tab
+    linkCell.appendChild(linkElement);
+    row.appendChild(linkCell);
 
-      // Rename button
-      const renameButton = document.createElement("button");
-      renameButton.textContent = "Rename";
-      renameButton.onclick = () => renameLink(index);
-      actionsCell.appendChild(renameButton);
+    // Actions column
+    const actionsCell = document.createElement("td");
 
-      // Remove button
-      const removeButton = document.createElement("button");
-      removeButton.textContent = "Remove";
-      removeButton.style.marginLeft = "10px";
-      removeButton.onclick = () => removeLink(index);
-      actionsCell.appendChild(removeButton);
+    // Rename button
+    const renameButton = document.createElement("button");
+    renameButton.textContent = "Rename";
+    renameButton.onclick = () => renameLink(index);
+    actionsCell.appendChild(renameButton);
 
-      row.appendChild(actionsCell);
-      savedLinksList.appendChild(row);
-    });
-  }
+    // Remove button
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.style.marginLeft = "10px";
+    removeButton.onclick = () => removeLink(index);
+    actionsCell.appendChild(removeButton);
 
+    row.appendChild(actionsCell);
+    savedLinksList.appendChild(row);
+  });
+}
   // Function to rename a link
   function renameLink(index) {
     const savedPoemLinks = JSON.parse(localStorage.getItem("savedPoemLinks")) || [];
